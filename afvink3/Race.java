@@ -39,13 +39,21 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Race extends JFrame implements ActionListener {
-
     /** declaratie van variabelen */
     /* (1) Declareer hier een constante int met de naam lengte en een waarde van 250 */
     /* (2) Declareer hier h1, h2, h3, h4 van het type Paard
      *  Deze paarden instantieer je later in het programma
      */
     /* (3) Declareer een button met de naam button van het type JButton */
+
+    int lengte = 250;
+    Paard h1;
+    Paard h2;
+    Paard h3;
+    Paard h4;
+    JButton button;
+
+
     private JPanel panel;
 
     /** Applicatie - main functie voor runnen applicatie */
@@ -53,6 +61,7 @@ public class Race extends JFrame implements ActionListener {
         Race frame = new Race();
         /* (4) Geef het frame een breedte van 400 en hoogte van 140 */
         frame.createGUI();
+        frame.setSize(400,140);
         frame.setVisible(true);
     }
 
@@ -62,6 +71,7 @@ public class Race extends JFrame implements ActionListener {
         panel.setBackground(Color.white);
         /** Tekenen van de finish streep */
         /* (5) Geef de finish streep een rode kleur */
+        g.setColor(Color.red);
         g.fillRect(lengte, 0, 3, 100);
         /**(6) Creatie van 4 paarden
          * Dit is een instantiering van de 4 paard objecten
@@ -69,6 +79,14 @@ public class Race extends JFrame implements ActionListener {
          * Kijk in de class Paard hoe je de paarden
          * kunt initialiseren.
          */
+
+        h1 = new Paard("Lightning", Color.brown);
+        h2 = new Paard("Storm", Color.black);
+        h3 = new Paard("Wind", Color.white);
+        h4 = new Paard("Rain", Color.gray);
+
+
+
         /** Loop tot een paard over de finish is*/
         while (h1.getAfstand() < lengte
                 && h2.getAfstand() < lengte
@@ -83,9 +101,18 @@ public class Race extends JFrame implements ActionListener {
              * dat er 1 seconde pauze is. De methode pauzeer is onderdeel
              * van deze class
              */
+
+            pauzeer(10);
+
             /* (8) Voeg hier code in om 4 paarden te tekenen die rennen
              * Dus een call van de methode tekenPaard
              */
+
+            tekenPaard(g, h1);
+            tekenPaard(g, h2);
+            tekenPaard(g, h3);
+            tekenPaard(g, h4);
+
         }
         /** Kijk welk paard gewonnen heeft
          */
@@ -112,6 +139,7 @@ public class Race extends JFrame implements ActionListener {
         panel.setPreferredSize(new Dimension(300, 100));
         panel.setBackground(Color.white);
         window.add(panel);
+        button = new JButton("Run!");
         /* (9) Zet hier de tekst Run! op de button */
         window.add(button);
         button.addActionListener(this);
